@@ -1,0 +1,2 @@
+
+require('./deep_object');
