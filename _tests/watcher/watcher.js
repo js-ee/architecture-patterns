@@ -19,4 +19,32 @@ describe('Watcher', function () {
         watcher.watch(done);
         watcher.update(42);
     });
+
+    it('should return number', function () {
+        const watcher = new Watcher(17);
+        assert.equal(watcher, 17);
+    });
+
+    it('should return string', function () {
+        const watcher = new Watcher('Hello');
+        assert.equal(watcher, 'Hello');
+    });
+
+    it('should return object', function () {
+        const obj = {test: 222};
+        const watcher = new Watcher(obj);
+        assert.equal(watcher.valueOf(), obj);
+    });
+
+    it('should update value', function () {
+        const watcher = new Watcher('Hello');
+        assert.equal(watcher, 'Hello');
+
+        watcher.update(42);
+        assert.equal(watcher, 42);
+
+        const obj = {test: 222};
+        watcher.update(obj);
+        assert.equal(watcher.valueOf(), obj);
+    });
 });
