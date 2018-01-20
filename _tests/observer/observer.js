@@ -1,6 +1,6 @@
 
 const assert = require('chai').assert;
-const Observer = require('../../observer/observer');
+const Observer = require('../../observer');
 
 describe('Observer', function () {
     it('should be defined', function () {

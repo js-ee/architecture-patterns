@@ -1,6 +1,6 @@
 
 const assert = require('chai').assert;
-const Watcher = require('../../observer/watcher');
+const Watcher = require('../../watcher');
 
 describe('Watcher', function () {
     it('should be defined', function () {
@@ -9,14 +9,14 @@ describe('Watcher', function () {
     });
 
     it('should have proper methods', function () {
-        const observer = new Watcher();
-        assert.equal(typeof observer.watch, 'function');
-        assert.equal(typeof observer.update, 'function');
+        const watcher = new Watcher();
+        assert.equal(typeof watcher.watch, 'function');
+        assert.equal(typeof watcher.update, 'function');
     });
 
     it('should call event handler', function (done) {
-        const observer = new Watcher();
-        observer.watch(done);
-        observer.update('some_event');
+        const watcher = new Watcher(17);
+        watcher.watch(done);
+        watcher.update(42);
     });
 });
