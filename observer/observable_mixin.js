@@ -1,4 +1,6 @@
 
-export function ObservableMixin () {
+function ObservableMixin () {
 
 }
+
+module.exports = ObservableMixin;
