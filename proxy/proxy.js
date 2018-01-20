@@ -3,6 +3,6 @@
  *
  * @param {Object} target
  * @param {Object} handler
- * @constructor {Proxy}
+ * @constructor {Object}
  */
 module.exports = Proxy;
