@@ -16,6 +16,14 @@ Observer.prototype.off = function off (event, handler) {
     }
 };
 
+Observer.prototype.once = function once (event, handler) {
+    const proxyHandler = (...args) => {
+        this.off(event, proxyHandler);
+        return handler(...args);
+    };
+    this.on(event, proxyHandler);
+};
+
 Observer.prototype.emit = function emit (event, data) {
     if (!this._events[event]) return;
     this._events[event].forEach(function (handler) {

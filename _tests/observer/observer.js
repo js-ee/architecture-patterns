@@ -11,6 +11,7 @@ describe('Observer', function () {
     it('should have proper methods', function () {
         const observer = new Observer();
         assert.equal(typeof observer.on, 'function');
+        assert.equal(typeof observer.once, 'function');
         assert.equal(typeof observer.off, 'function');
         assert.equal(typeof observer.emit, 'function');
     });
@@ -60,5 +61,29 @@ describe('Observer', function () {
         observer.on('proper_event', done);
         observer.on('other_event', handler);
         observer.emit('proper_event');
+    });
+
+    it('should call event once', function () {
+        var counter = 0;
+        function handler () {
+            assert.equal(++counter, 1);
+        }
+        const observer = new Observer();
+        observer.once('some_event', handler);
+        observer.emit('some_event');
+        observer.emit('some_event');
+    });
+
+    it('should call event multiple times', function () {
+        var counter = 0;
+        function handler () {
+            counter++;
+        }
+        const observer = new Observer();
+        observer.on('some_event', handler);
+        observer.emit('some_event');
+        observer.emit('some_event');
+        observer.emit('some_event');
+        assert.equal(counter, 3);
     });
 });
