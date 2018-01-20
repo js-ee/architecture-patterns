@@ -13,7 +13,7 @@ observer.emit('some_event');
 
 ```javascript
 const Watcher = require('architecture-patterns/watcher');
-const observer = new Watcher(17);
-observer.watch(() => console.log('onUpdated'));
-observer.update(42);
+const watcher = new Watcher(17);
+watcher.watch(() => console.log('onUpdated'));
+watcher.update(42);
 ```
