@@ -3,15 +3,24 @@ const assert = require('assert');
 const Observer = require('../../observer/observer');
 
 describe('Observer', function () {
-    it('defined', function () {
+    it('should be defined', function () {
         assert.equal(typeof Observer, 'function');
         assert.equal(typeof Observer.prototype, 'object', 'prototype is not defined');
     });
 
-    // it('constructor name defined', function () {
-    //     assert.equal(Positive.name, 'Positive');
-    // });
-    //
+    it('should have proper methods', function () {
+        const observer = new Observer();
+        assert.equal(typeof observer.on, 'function');
+        assert.equal(typeof observer.off, 'function');
+        assert.equal(typeof observer.emit, 'function');
+    });
+
+    it('should call event handler', function (done) {
+        const observer = new Observer();
+        observer.on('some_event', done);
+        observer.emit('some_event');
+    });
+
     // it('instanseof Positive', function () {
     //     const instance = new Positive(1);
     //     assert(instance instanceof Positive);
