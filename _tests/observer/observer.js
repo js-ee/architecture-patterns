@@ -1,5 +1,5 @@
 
-const assert = require('assert');
+const assert = require('chai').assert;
 const Observer = require('../../observer/observer');
 
 describe('Observer', function () {
@@ -21,39 +21,44 @@ describe('Observer', function () {
         observer.emit('some_event');
     });
 
-    // it('instanseof Positive', function () {
-    //     const instance = new Positive(1);
-    //     assert(instance instanceof Positive);
-    // });
-    //
-    // it('instanseof Number', function () {
-    //     const instance = new Positive(1);
-    //     assert(instance instanceof Number);
-    // });
-    //
-    // it('equal to number', function () {
-    //     const str = 25;
-    //     const instance = new Positive(str);
-    //     assert.equal(instance, str);
-    // });
-    //
-    // it('has expected methods', function () {
-    //     const instance = new Positive();
-    //     assert.equal(typeof instance.validate, 'function', 'validate is not defined');
-    // });
-    //
-    // describe('validate', function () {
-    //     it('empty', function () {
-    //         assert(!(new Positive()).validate());
-    //     });
-    //
-    //     it('valid', function () {
-    //         assert((new Positive(1)).validate());
-    //     });
-    //
-    //     it('invalid', function () {
-    //         assert(!(new Positive(-1)).validate());
-    //         assert(!(new Positive('Hello')).validate());
-    //     });
-    // });
+    it('should not call event handler after off by handler', function () {
+        function handler () {
+            throw new Error('Should not be called');
+        }
+        const observer = new Observer();
+        observer.on('some_event', handler);
+        observer.off('some_event', handler);
+        observer.emit('some_event');
+    });
+
+    it('should not call event handler after off without handler', function () {
+        function handler () {
+            throw new Error('Should not be called');
+        }
+        const observer = new Observer();
+        observer.on('some_event', handler);
+        observer.off('some_event');
+        observer.emit('some_event');
+    });
+
+    it('should call proper event handler', function (done) {
+        function handler () {
+            throw new Error('Should not be called');
+        }
+        const observer = new Observer();
+        observer.on('some_event', handler);
+        observer.on('some_event', done);
+        observer.off('some_event', handler);
+        observer.emit('some_event');
+    });
+
+    it('should call proper event from multiple events', function (done) {
+        function handler () {
+            throw new Error('Should not be called');
+        }
+        const observer = new Observer();
+        observer.on('proper_event', done);
+        observer.on('other_event', handler);
+        observer.emit('proper_event');
+    });
 });

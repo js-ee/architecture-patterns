@@ -1,5 +1,5 @@
 
-const assert = require('assert');
+const assert = require('chai').assert;
 const ObservableMixin = require('../../observer/observable_mixin');
 
 describe('ObservableMixin', function () {

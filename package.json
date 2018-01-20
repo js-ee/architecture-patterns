@@ -1,6 +1,6 @@
 {
   "name": "architecture-patterns",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Software Architecture Patterns",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/js-ee/architecture-patterns/issues"
   },
-  "homepage": "https://github.com/js-ee/architecture-patterns#readme"
+  "homepage": "https://github.com/js-ee/architecture-patterns#readme",
+  "devDependencies": {
+    "chai": "^4.1.2"
+  }
 }
